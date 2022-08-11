@@ -1,4 +1,5 @@
 import React from "react"
+import { Helmet } from "react-helmet-async"
 import Awards from "./awards/Awards"
 import Featured from "./featured/Featured"
 import Hero from "./hero/Hero"
@@ -10,12 +11,15 @@ import Team from "./team/Team"
 const Home = () => {
   return (
     <>
+    <Helmet>
+      <title>Home</title>
+    </Helmet>
       <Hero />
       <Featured />
       <Recent />
-      <Awards />
+      {/* <Awards />
       <Location />
-      <Team />
+      <Team /> */}
       <Price />
     </>
   )

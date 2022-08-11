@@ -8,12 +8,12 @@ import Pricing from "../pricing/Pricing";
 import Blog from "../blog/Blog";
 import Services from "../services/Services";
 import Contact from "../contact/Contact";
-
+import {Store} from "../../Store" 
 const Pages = () => {
   return (
     <>
-      <Router >
-        <Header/>
+      <Router  >
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           {/* <Route exact path="/about" component={About} /> */}

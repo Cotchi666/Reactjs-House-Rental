@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import Back from "../common/Back";
 import Heading from "../common/Heading";
 import img from "../images/about.jpg";
@@ -7,6 +7,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import houseApi from "../../api/houseApi";
+import { Helmet } from "react-helmet-async";
+import { Store } from "../../Store";
+import axiosClient from "../../api/axiosClient";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,33 +31,55 @@ const Detail = () => {
     loading: true,
     error: "",
   });
-  console.log("check room", room);
   useEffect(() => {
     const fetchRooms = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await houseApi.getRoomById(objectId);
-        console.log("Fetch rooms successfully: ", response);
+        console.log("check data 1", response)
         dispatch({
           type: "FETCH_SUCCESS",
           payload: response,
         });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: error.message });
-        console.log("Failed to fetch rooms list: ", error);
       }
     };
     fetchRooms();
   }, [objectId]);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
 
-  
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x.objectId === room.objectId);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const response2 = await houseApi.getRoomById(room.objectId);
+    console.log("check data 2", response2.count)
+    if ( response2.count < quantity) {
+      window.alert("sorry . Product is out of stock");
+      return;
+    }
+    console.log("first")
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: {
+        ...room,
+        quantity: 1,
+      },
+    });
+    console.log("second")
+  };
+
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
     <div>{error}</div>
   ) : (
-    <section className="about">
+    <section className="about" key={room.objectId}>
+      <Helmet>
+        <title>{room.name}</title>
+      </Helmet>
       <Back
         name="About Us"
         title="About Us - Who We Are?"
@@ -79,7 +104,9 @@ const Detail = () => {
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip.
           </p>
-          <button className="btn2">More About Us</button>
+          <button onClick={addToCartHandler} className="btn2">
+            Add to List
+          </button>
         </div>
         <div className="right row">
           {objectId}
