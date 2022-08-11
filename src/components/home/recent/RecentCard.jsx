@@ -50,10 +50,10 @@ const RecentCard = () => {
           <div>{error}</div>
         ) : (
           rooms.map((item) => {
-            const category = item.parent.CategoryId.categories;
+            const { category } = item.parent.CategoryId.categories;
             return (
               <div className="box shadow" key={item.objectId}>
-                <Link to href={`/classes/Room/${item.objectId}`}>
+                <Link to={`/classes/Room/${item.objectId}`}>
                   <div className="img">
                     <img src={item.parent.image} alt="" />
                   </div>
@@ -71,7 +71,7 @@ const RecentCard = () => {
                     </span>
                     <i className="fa fa-heart"></i>
                   </div>
-                  <Link to href={`/classes/Room/${item.objectId}`}>
+                  <Link to={`/classes/Room/${item.objectId}`}>
                     <h4>{item.name}</h4>
                   </Link>
                   <p>
@@ -81,7 +81,7 @@ const RecentCard = () => {
                 </div>
                 <div className="button flex">
                   <div>
-                    <Link to href={`/classes/Room/${item.objectId}`}>
+                    <Link to={`/classes/Room/${item.objectId}`}>
                       <button className="btn2">{item.parent.price}</button>
                     </Link>
 

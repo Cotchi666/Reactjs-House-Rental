@@ -3,22 +3,20 @@ import Header from "../common/header/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "../home/Home";
 import Footer from "../common/footer/Footer";
-import About from "../about/About";
+import Detail from "../about/Detail";
 import Pricing from "../pricing/Pricing";
 import Blog from "../blog/Blog";
 import Services from "../services/Services";
 import Contact from "../contact/Contact";
-import Detail from "../detail/Detail";
+
 const Pages = () => {
   return (
     <>
-      <Router>
-        <Header>
-         
-        </Header>
+      <Router >
+        <Header/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
+          {/* <Route exact path="/about" component={About} /> */}
           <Route exact path="/services" component={Services} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/pricing" component={Pricing} />
