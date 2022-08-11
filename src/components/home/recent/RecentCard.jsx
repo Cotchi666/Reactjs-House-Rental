@@ -1,39 +1,72 @@
-import React from "react"
-import { list } from "../../data/Data"
-
+import React from "react";
+import { useEffect, useState } from "react";
+import houseApi from "../../../api/houseApi";
 const RecentCard = () => {
+  const [data, setHouseList] = useState([]);
+  //form raw 3 properties
+  useEffect(() => {
+    const fetchHouseList = async () => {
+      try {
+        const response = await houseApi.getAllRoom();
+        console.log("Fetch products successfully: ", response.results);
+        // 3 out of 8 obj in an array
+        const apidata = response.results.slice(0, 9);
+        console.log("check from list property ", apidata);
+        setHouseList(apidata);
+      } catch (error) {
+        console.log("Failed to fetch product list: ", error);
+      }
+    };
+    fetchHouseList();
+  }, []);
   return (
     <>
-      <div className='content grid3 mtop'>
-        {list.map((val, index) => {
-          const { cover, category, location, name, price, type } = val
+      <div className="content grid3 mtop">
+        {data.map((item) => {
+          const category =  item.parent.CategoryId.categories
           return (
-            <div className='box shadow' key={index}>
-              <div className='img'>
-                <img src={cover} alt='' />
-              </div>
-              <div className='text'>
-                <div className='category flex'>
-                  <span style={{ background: category === "For Sale" ? "#25b5791a" : "#ff98001a", color: category === "For Sale" ? "#25b579" : "#ff9800" }}>{category}</span>
-                  <i className='fa fa-heart'></i>
+            <div className="box shadow" key={item.objectId}>
+              <a href="/classes/Room/${item.objectId}">
+                <div className="img">
+                  <img src={item.parent.image} alt="" />
                 </div>
-                <h4>{name}</h4>
+              </a>
+              <div className="text">
+                <div className="category flex">
+                  <span
+                  style={{
+                    background:
+                      category === "Popular" ? "#25b5791a" : "#ff98001a",
+                    color: category === "Popular" ? "#25b579" : "#ff9800",
+                  }}
+                  >
+                    {item.parent.CategoryId.categories}
+                  </span>
+                  <i className="fa fa-heart"></i>
+                </div>
+                <a href="/classes/Room/${item.objectId}">
+                  <h4>{item.name}</h4>
+                </a>
                 <p>
-                  <i className='fa fa-location-dot'></i> {location}
+                  <i className="fa fa-location-dot"></i> {item.parent.location}
                 </p>
               </div>
-              <div className='button flex'>
+              <div className="button flex">
                 <div>
-                  <button className='btn2'>{price}</button> <label htmlFor=''>/sqft</label>
+                  <a href="/classes/Room/${item.objectId}">
+                    <button className="btn2">{item.parent.price}</button>
+                  </a>
+
+                  <label htmlFor="">/sqft</label>
                 </div>
-                <span>{type}</span>
+                <span>{item.parent.CategoryId.categories}</span>
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default RecentCard
+export default RecentCard;

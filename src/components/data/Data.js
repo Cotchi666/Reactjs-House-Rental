@@ -24,6 +24,7 @@ export const nav = [
     path: "/contact",
   },
 ]
+
 export const featured = [
   {
     cover: "../images/hero/h1.png",
@@ -51,6 +52,7 @@ export const featured = [
     total: "80 Property",
   },
 ]
+//house
 export const list = [
   {
     id: 1,
