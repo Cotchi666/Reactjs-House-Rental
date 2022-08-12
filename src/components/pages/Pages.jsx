@@ -8,11 +8,13 @@ import Pricing from "../pricing/Pricing";
 import Blog from "../blog/Blog";
 import Services from "../services/Services";
 import Contact from "../contact/Contact";
-import {Store} from "../../Store" 
+import { Store } from "../../Store";
+import CartScreen from "../cart/CartScreen";
+import CartListScreen from "../cart/CartListScreen";
 const Pages = () => {
   return (
     <>
-      <Router  >
+      <Router>
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
@@ -22,8 +24,11 @@ const Pages = () => {
           <Route exact path="/pricing" component={Pricing} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/classes/Room/:objectId" component={Detail} />
+          <Route exact path="/Cart" component={CartListScreen} />
         </Switch>
         <Footer />
+
+      
       </Router>
     </>
   );

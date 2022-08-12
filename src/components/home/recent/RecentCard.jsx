@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { Link } from "react-router-dom";
 import houseApi from "../../../api/houseApi";
 import logger from "use-reducer-logger";
@@ -50,7 +50,7 @@ const RecentCard = () => {
           <div>{error}</div>
         ) : (
           rooms.map((item) => {
-            const { category } = item.parent.CategoryId.categories;
+            const  category  = item.parent.CategoryId.categories;
             return (
               <div className="box shadow" key={item.objectId}>
                 <Link to={`/classes/Room/${item.objectId}`}>
@@ -58,16 +58,17 @@ const RecentCard = () => {
                     <img src={item.parent.image} alt="" />
                   </div>
                 </Link>
+
                 <div className="text">
-                  <div className="category flex">
-                    <span
+                  <div className="category flex">                  
+                    <span className="category"
                       style={{
                         background:
-                          category === "Popular" ? "#25b5791a" : "#ff98001a",
-                        color: category === "Popular" ? "#25b579" : "#ff9800",
+                          category === "Featured" ? "#25b5791a" : "#ff98001a",
+                        color: category === "Featured" ? "#25b579" : "#ff9800",
                       }}
                     >
-                      {item.parent.CategoryId.categories}
+                      {category}
                     </span>
                     <i className="fa fa-heart"></i>
                   </div>

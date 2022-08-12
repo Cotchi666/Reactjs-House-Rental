@@ -1,19 +1,16 @@
-import React from "react"
-import { Helmet } from "react-helmet-async"
-import Awards from "./awards/Awards"
-import Featured from "./featured/Featured"
-import Hero from "./hero/Hero"
-import Location from "./location/Location"
-import Price from "./price/Price"
-import Recent from "./recent/Recent"
-import Team from "./team/Team"
+import React from "react";
+import { Helmet } from "react-helmet-async";
+import Featured from "./featured/Featured";
+import Hero from "./hero/Hero";
+import Price from "./price/Price";
+import Recent from "./recent/Recent";
 
 const Home = () => {
   return (
     <>
-    <Helmet>
-      <title>Home</title>
-    </Helmet>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Hero />
       <Featured />
       <Recent />
@@ -21,8 +18,9 @@ const Home = () => {
       <Location />
       <Team /> */}
       <Price />
+    
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

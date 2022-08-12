@@ -23,6 +23,14 @@ const houseApi = {
     const url = "/classes/Room?include=parent.CategoryId";
     return axiosClient.get(url);
   },
+  create: (username, password)=>{
+    const url = "/functions/create-new-user"
+    return axiosClient.post(url, {username, password})
+  },
+  login: (username, password)=>{
+    const url = "/functions/login"
+    return axiosClient.post(url, {username, password})
+  },
 };
 
 export default houseApi;

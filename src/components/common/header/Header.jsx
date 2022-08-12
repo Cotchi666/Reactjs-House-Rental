@@ -32,8 +32,9 @@ const Header = () => {
                 <span>{cart.cartItems.length}</span>
                 // <span>{cart.cartItems.reduce((a,c)=> a+ c.quantity,0)}</span>
               )}   
-            {cart.cartItems.length }  
-              My List
+              <Link to='/cart'> My List</Link>
+             
+              
             </h4>
             <button className="btn1">
               <i className="fa fa-sign-out"></i> Sign In

@@ -1,15 +1,12 @@
 import React, { useContext, useReducer } from "react";
 import Back from "../common/Back";
 import Heading from "../common/Heading";
-import img from "../images/about.jpg";
 import "./detail.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import houseApi from "../../api/houseApi";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../../Store";
-import axiosClient from "../../api/axiosClient";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +21,7 @@ const reducer = (state, action) => {
   }
 };
 const Detail = () => {
+  const history = useHistory();
   const params = useParams();
   const { objectId } = params;
   const [{ room, loading, error }, dispatch] = useReducer(reducer, {
@@ -36,7 +34,7 @@ const Detail = () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await houseApi.getRoomById(objectId);
-        console.log("check data 1", response)
+        console.log("check data 1", response);
         dispatch({
           type: "FETCH_SUCCESS",
           payload: response,
@@ -55,12 +53,12 @@ const Detail = () => {
     const existItem = cart.cartItems.find((x) => x.objectId === room.objectId);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const response2 = await houseApi.getRoomById(room.objectId);
-    console.log("check data 2", response2.count)
-    if ( response2.count < quantity) {
+    console.log("check data 2", response2.count);
+    if (response2.count < quantity) {
       window.alert("sorry . Product is out of stock");
       return;
     }
-    console.log("first")
+    console.log("first");
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: {
@@ -68,7 +66,10 @@ const Detail = () => {
         quantity: 1,
       },
     });
-    console.log("second")
+
+    history.push("/cart");
+
+    console.log("second");
   };
 
   return loading ? (
