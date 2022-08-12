@@ -62,7 +62,7 @@ export default function CartScreen() {
                 <button className="btn2" onClick={toggle}>
                   delete
                 </button>
-                <Modal isShowing={isShowing} hide={toggle} />
+                <Modal isShowing={isShowing} hide={toggle} objectId={item.objectId}  />
               </div>
             </div>
           );

@@ -31,6 +31,10 @@ const houseApi = {
     const url = "/functions/login"
     return axiosClient.post(url, {username, password})
   },
+  test: (name, phone,room_id)=>{
+    const url = "/functions/order"
+    return axiosClient.post(url, {name, phone, room_id})
+  },
 };
 
 export default houseApi;
